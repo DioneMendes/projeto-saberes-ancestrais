@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa de Troca de Saberes Ancestrais</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'terra': '#8B4513',
+                        'folha': '#2E8B57',
+                        'sol': '#DAA520',
+                        'berimbau': '#800080',
+                        'barro': '#CD853F',
+                    }
+                }
+            },
+            daisyui: {
+                themes: [
+                    {
+                        ancestral: {
+                            "primary": "#8B4513",
+                            "secondary": "#2E8B57",
+                            "accent": "#DAA520",
+                            "neutral": "#CD853F",
+                            "base-100": "#FFF8E1",
+                            "info": "#3ABFF8",
+                            "success": "#36D399",
+                            "warning": "#FBBD23",
+                            "error": "#F87272",
+                        },
+                        ancestralDark: {
+                            "primary": "#A05C2C",
+                            "secondary": "#3DA275",
+                            "accent": "#E9B94C",
+                            "neutral": "#D9A66D",
+                            "base-100": "#2A2522",
+                            "base-content": "#E8DCC9",
+                            "info": "#3ABFF8",
+                            "success": "#36D399",
+                            "warning": "#FBBD23",
+                            "error": "#F87272",
+                        }
+                    },
+                ],
+            },
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF8E1;
+        }
+        
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B4513' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .dark .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23A05C2C' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body data-theme="ancestral" class="bg-pattern">
+    <!-- Tela de Boas-vindas -->
+    <div id="welcome-screen" class="min-h-screen flex flex-col items-center justify-center px-4 py-8">
+        <div class="text-center max-w-md mx-auto">
+            <div class="animate-bounce mb-4">
+                <img src="https://via.placeholder.com/150?text=Raízes+Vivas" alt="Logo Raízes Vivas" class="mx-auto rounded-full shadow-lg border-4 border-terra">
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-terra mb-2">Casa de Troca de Saberes Ancestrais</h1>
+            <p class="text-lg text-berimbau italic mb-8">"Onde as raízes do passado nutrem as sementes do futuro"</p>
+            
+            <div class="space-y-4">
+                <button id="enter-btn" class="btn btn-primary btn-lg w-full text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Entrar
+                </button>
+                
+                <button id="register-btn" class="btn btn-outline btn-secondary w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                    Criar Conta
+                </button>
+            </div>
+            
+            <div class="mt-8 text-sm text-gray-600">
+                <p>Versão 1.0 - Desenvolvido com a comunidade</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Menu Principal (oculto inicialmente) -->
+    <div id="main-app" class="hidden">
+        <!-- Cabeçalho -->
+        <header class="bg-terra text-white shadow-md">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://via.placeholder.com/40?text=RV" alt="Logo" class="h-10 w-10 rounded-full mr-2">
+                    <h1 class="text-xl font-bold">Raízes Vivas</h1>
+                </div>
+                <button id="menu-toggle" class="lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+        
+        <!-- Menu de navegação -->
+        <nav class="bg-barro text-white p-4 shadow-md">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-4 text-center">
+                    <a href="#biblioteca" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <span class="text-sm mt-1">Biblioteca</span>
+                    </a>
+                    <a href="#agenda" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span class="text-sm mt-1">Agenda</span>
+                    </a>
+                    <a href="#diario" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                        <span class="text-sm mt-1">Diário</span>
+                    </a>
+                    <a href="#mestres" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span class="text-sm mt-1">Mestres</span>
+                    </a>
+                    <a href="#mural" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                        </svg>
+                        <span class="text-sm mt-1">Mural</span>
+                    </a>
+                    <a href="#config" class="menu-item flex flex-col items-center p-2 rounded-lg hover:bg-terra transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span class="text-sm mt-1">Configurações</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Conteúdo principal -->
+        <main class="container mx-auto px-4 py-6">
+            <!-- Biblioteca de Saberes -->
+            <section id="biblioteca" class="mb-12">
+                <div class="flex items-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-terra mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <h2 class="text-2xl font-bold text-terra">Biblioteca de Saberes</h2>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="#" class="card bg-white shadow-md hover:shadow-lg transition-shadow">
+                        <figure class="px-4 pt-4">
+                            <img src="https://via.placeholder.com/150?text=Plantas" alt="Plantas Medicinais" class="rounded-lg h-32 w-full object-cover" />
+                        </figure>
+                        <div class="card-body p-4 text-center">
+                            <h3 class="card-title text-folha justify-center text-lg">Plantas Medicinais</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card bg-white shadow-md hover:shadow-lg transition-shadow">
+                        <figure class="px-4 pt-4">
+                            <img src="https://via.placeholder.com/150?text=Histórias" alt="Histórias Orais" class="rounded-lg h-32 w-full object-cover" />
+                        </figure>
+                        <div class="card-body p-4 text-center">
+                            <h3 class="card-title text-folha justify-center text-lg">Histórias Orais</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card bg-white shadow-md hover:shadow-lg transition-shadow">
+                        <figure class="px-4 pt-4">
+                            <img src="https://via.placeholder.com/150?text=Cantigas" alt="Cantigas e Rezas" class="rounded-lg h-32 w-full object-cover" />
+                        </figure>
+                        <div class="card-body p-4 text-center">
+                            <h3 class="card-title text-folha justify-center text-lg">Cantigas e Rezas</h3>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="card bg-white shadow-md hover:shadow-lg transition-shadow">
+                        <figure class="px-4 pt-4">
+                            <img src="https://via.placeholder.com/150?text=Rituais" alt="Rituais e Modos de Vida" class="rounded-lg h-32 w-full object-cover" />
+                        </figure>
+                        <div class="card-body p-4 text-center">
+                            <h3 class="card-title text-folha justify-center text-lg">Rituais e Modos de Vida</h3>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="mt-6">
+                    <div class="relative">
+                        <input type="text" placeholder="Buscar saberes..." class="input input-bordered w-full pr-10" />
+                        <button class="absolute right-3 top-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Agenda de Trocas -->
+            <section id="agenda" class="mb-12">
+                <div class="flex items-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-terra mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold text-terra">Agenda de Trocas</h2>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Novembro 2023</h3>
+                        <div>
+                            <button class="btn btn-sm btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button class="btn btn-sm btn-ghost">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-7 gap-1 text-center mb-2">
+                        <div class="text-xs font-medium">Dom</div>
+                        <div class="text-xs font-medium">Seg</div>
+                        <div class="text-xs font-medium">Ter</div>
+                        <div class="text-xs font-medium">Qua</div>
+                        <div class="text-xs font-medium">Qui</div>
+                        <div class="text-xs font-medium">Sex</div>
+                        <div class="text-xs font-medium">Sáb</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-7 gap-1 text-center">
+                        <div class="p-2 text-gray-400">29</div>
+                        <div class="p-2 text-gray-400">30</div>
+                        <div class="p-2 text-gray-400">31</div>
+                        <div class="p-2">1</div>
+                        <div class="p-2">2</div>
+                        <div class="p-2">3</div>
+                        <div class="p-2">4</div>
+                        <div class="p-2">5</div>
+                        <div class="p-2">6</div>
+                        <div class="p-2">7</div>
+                        <div class="p-2">8</div>
+                        <div class="p-2">9</div>
+                        <div class="p-2">10</div>
+                        <div class="p-2">11</div>
+                        <div class="p-2">12</div>
+                        <div class="p-2">13</div>
+                        <div class="p-2">14</div>
+                        <div class="p-2 bg-sol rounded-lg font-bold">15</div>
+                        <div class="p-2">16</div>
+                        <div class="p-2 bg-folha rounded-lg font-bold text-white">17</div>
+                        <div class="p-2">18</div>
+                        <div class="p-2">19</div>
+                        <div class="p-2">20</div>
+                        <div class="p-2">21</div>
+                        <div class="p-2">22</div>
+                        <div class="p-2">23</div>
+                        <div class="p-2">24</div>
+                        <div class="p-2">25</div>
+                        <div class="p-2">26</div>
+                        <div class="p-2">27</div>
+                        <div class="p-2">28</div>
+                        <div class="p-2">29</div>
+                        <div class="p-2">30</div>
+                        <div class="p-2 text-gray-400">1</div>
+                        <div class="p-2 text-gray-400">2</div>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div class="card bg-white shadow-md">
+                        <div class="card-body p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-12 h-12 rounded-full bg-sol flex items-center justify-center text-white font-bold mr-4">
+                                    <div class="text-center">
+                                        <div class="text-xs">NOV</div>
+                                        <div class="text-lg">15</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Feira de Trocas de Sementes</h3>
+                                    <p class="text-sm text-gray-600">Praça Central da Comunidade • 9h às 16h</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">Traga suas sementes crioulas para trocar e fortalecer nosso banco comunitário. Haverá roda de conversa com os mestres agricultores.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <button class="btn btn-sm btn-primary text-white">Confirmar presença</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white shadow-md">
+                        <div class="card-body p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-12 h-12 rounded-full bg-folha flex items-center justify-center text-white font-bold mr-4">
+                                    <div class="text-center">
+                                        <div class="text-xs">NOV</div>
+                                        <div class="text-lg">17</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg">Oficina de Plantas Medicinais</h3>
+                                    <p class="text-sm text-gray-600">Casa de Dona Josefa • 14h às 17h</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">Aprenda a identificar e preparar remédios naturais com as plantas do nosso território. Traga um caderno para anotações.</p>
+                            <div class="card-actions justify-end mt-2">
+                                <button class="btn btn-sm btn-primary text-white">Confirmar presença</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Mestres e Guardiões -->
+            <section id="mestres" class="mb-12">
+                <div class="flex items-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-terra mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold text-terra">Mestres e Guardiões</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card bg-white shadow-md">
+                        <figure class="px-6 pt-6">
+                            <img src="https://via.placeholder.com/300x200?text=Mestre+João" class="rounded-lg w-full h-48 object-cover" alt="Mestre João" />
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-terra">Mestre João dos Santos</h3>
+                            <p class="text-sm text-gray-600 mb-2">Comunidade Quilombola Bom Jesus • 78 anos</p>
+                            <div class="badge badge-accent mb-3">Plantas Medicinais</div>
+                            <p class="text-gray-700">"A terra nos dá tudo que precisamos para curar. É só saber olhar e respeitar."</p>
+                            <div class="card-actions justify-end mt-4">
+                                <button class="btn btn-sm btn-outline btn-primary">Ver saberes</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white shadow-md">
+                        <figure class="px-6 pt-6">
+                            <img src="https://via.placeholder.com/300x200?text=Dona+Maria" class="rounded-lg w-full h-48 object-cover" alt="Dona Maria" />
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-terra">Dona Maria da Conceição</h3>
+                            <p class="text-sm text-gray-600 mb-2">Comunidade Ribeirinha Águas Claras • 82 anos</p>
+                            <div class="badge badge-accent mb-3">Cantigas e Rezas</div>
+                            <p class="text-gray-700">"Quando canto, não sou eu quem canta, são os meus ancestrais que falam pela minha voz."</p>
+                            <div class="card-actions justify-end mt-4">
+                                <button class="btn btn-sm btn-outline btn-primary">Ver saberes</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white shadow-md">
+                        <figure class="px-6 pt-6">
+                            <img src="https://via.placeholder.com/300x200?text=Seu+Pedro" class="rounded-lg w-full h-48 object-cover" alt="Seu Pedro" />
+                        </figure>
+                        <div class="card-body p-6">
+                            <h3 class="card-title text-terra">Seu Pedro Oliveira</h3>
+                            <p class="text-sm text-gray-600 mb-2">Aldeia Tupi-Guarani • 75 anos</p>
+                            <div class="badge badge-accent mb-3">Histórias Orais</div>
+                            <p class="text-gray-700">"Cada história que conto é uma semente que planto na memória dos mais jovens."</p>
+                            <div class="card-actions justify-end mt-4">
+                                <button class="btn btn-sm btn-outline btn-primary">Ver saberes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-6">
+                    <button class="btn btn-outline btn-primary">Ver mais mestres</button>
+                </div>
+            </section>
+            
+            <!-- Mural da Comunidade -->
+            <section id="mural" class="mb-12">
+                <div class="flex items-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-terra mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold text-terra">Mural da Comunidade</h2>
+                </div>
+                
+                <div class="mb-6">
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <textarea class="textarea textarea-bordered w-full" placeholder="Compartilhe um saber ou faça uma pergunta..."></textarea>
+                        <div class="flex justify-between mt-2">
+                            <div class="flex space-x-2">
+                                <button class="btn btn-sm btn-ghost">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                                <button class="btn btn-sm btn-ghost">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.465a5 5 0 001.06-7.072m-2.829 9.9a9 9 0 010-12.728" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <button class="btn btn-sm btn-primary text-white">Publicar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="flex items-start mb-4">
+                            <img src="https://via.placeholder.com/50?text=JL" alt="Perfil" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h4 class="font-semibold">Joana Lima</h4>
+                                <p class="text-xs text-gray-600">Comunidade Quilombola Bom Jesus • 2h atrás</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Ontem aprendi com Dona Maria como fazer um chá para dor de garganta usando folha de laranjeira, gengibre e mel. Alguém já experimentou?</p>
+                        <img src="https://via.placeholder.com/600x300?text=Foto+do+Chá" alt="Foto do Chá" class="rounded-lg w-full mb-4">
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <button class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                                12 gostaram
+                            </button>
+                            <button class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                5 comentários
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-4">
+                        <div class="flex items-start mb-4">
+                            <img src="https://via.placeholder.com/50?text=PS" alt="Perfil" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h4 class="font-semibold">Paulo Santos</h4>
+                                <p class="text-xs text-gray-600">Comunidade Ribeirinha Águas Claras • 1 dia atrás</p>
+                            </div>
+                        </div>
+                        <p class="mb-4">Tema do mês: "Saberes da Lua". A lua minguante é o melhor momento para colher plantas medicinais, pois os princípios ativos estão mais concentrados. Quais outros saberes vocês conhecem sobre a lua?</p>
+                        <div class="flex justify-between text-sm text-gray-600">
+                            <button class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                                23 gostaram
+                            </button>
+                            <button class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                                8 comentários
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-6">
+                    <button class="btn btn-outline btn-primary">Ver mais publicações</button>
+                </div>
+            </section>
+
+            <!-- Configurações -->
+            <section id="config" class="mb-12">
+                <div class="flex items-center mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-terra mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold text-terra">Configurações</h2>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-xl font-semibold mb-4">Aparência</h3>
+                    
+                    <div class="form-control">
+                        <label class="label cursor-pointer justify-start">
+                            <span class="label-text mr-4">Tema do Aplicativo</span>
+                            <div class="flex items-center ml-auto">
+                                <span class="mr-2 text-sm">Claro</span>
+                                <input type="checkbox" id="theme-toggle" class="toggle toggle-primary" />
+                                <span class="ml-2 text-sm">Escuro</span>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <h3 class="text-xl font-semibold mb-4">Perfil</h3>
+                    
+                    <div class="flex items-center mb-6">
+                        <div class="avatar">
+                            <div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-white text-2xl font-bold">
+                                JD
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <button class="btn btn-sm btn-outline">Alterar foto</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-control mb-4">
+                        <label class="label">
+                            <span class="label-text">Nome</span>
+                        </label>
+                        <input type="text" placeholder="Seu nome" class="input input-bordered" value="João da Silva" />
+                    </div>
+                    
+                    <div class="form-control mb-4">
+                        <label class="label">
+                            <span class="label-text">Comunidade</span>
+                        </label>
+                        <input type="text" placeholder="Sua comunidade" class="input input-bordered" value="Comunidade Quilombola Bom Jesus" />
+                    </div>
+                    
+                    <div class="form-control mb-6">
+                        <label class="label">
+                            <span class="label-text">Biografia</span>
+                        </label>
+                        <textarea class="textarea textarea-bordered h-24" placeholder="Conte um pouco sobre você...">Aprendiz de saberes tradicionais, interessado em plantas medicinais e histórias orais.</textarea>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button class="btn btn-primary text-white">Salvar alterações</button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Notificações</h3>
+                    
+                    <div class="form-control">
+                        <label class="label cursor-pointer justify-start">
+                            <span class="label-text">Eventos da agenda</span>
+                            <input type="checkbox" checked="checked" class="toggle toggle-primary ml-auto" />
+                        </label>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label cursor-pointer justify-start">
+                            <span class="label-text">Novos saberes compartilhados</span>
+                            <input type="checkbox" checked="checked" class="toggle toggle-primary ml-auto" />
+                        </label>
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label cursor-pointer justify-start">
+                            <span class="label-text">Comentários em minhas publicações</span>
+                            <input type="checkbox" checked="checked" class="toggle toggle-primary ml-auto" />
+                        </label>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="font-semibold">Versão do aplicativo</h3>
+                            <p class="text-sm text-gray-600">1.0.0</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline">Verificar atualizações</button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button class="btn btn-outline btn-error w-full">Sair do aplicativo</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Rodapé -->
+        <footer class="bg-terra text-white p-6">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h3 class="text-lg font-bold mb-3">Casa de Troca de Saberes Ancestrais</h3>
+                        <p class="text-sm">Preservando e compartilhando os conhecimentos tradicionais para as futuras gerações.</p>
+                        <p class="text-sm mt-2 italic">App de teste. Nomes de pessoas, organizações citados acima não são reais</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-3">Contato</h3>
+                        <p class="text-sm">contato@raizesvivas.org</p>
+                        <p class="text-sm">Desenvolvido com as comunidades tradicionais do Brasil</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold mb-3">Apoio</h3>
+                        <div class="flex space-x-4">
+                            <img src="https://via.placeholder.com/80x30?text=Logo1" alt="Apoiador 1" class="h-8">
+                            <img src="https://via.placeholder.com/80x30?text=Logo2" alt="Apoiador 2" class="h-8">
+                            <img src="https://via.placeholder.com/80x30?text=Logo3" alt="Apoiador 3" class="h-8">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/20 text-center text-sm">
+                    <p>App teste 2025 - por Dione - Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botões da tela de boas-vindas
+            const enterBtn = document.getElementById('enter-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const mainApp = document.getElementById('main-app');
+            
+            // Função para mostrar o app principal
+            function showMainApp() {
+                welcomeScreen.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+            }
+            
+            // Event listeners
+            enterBtn.addEventListener('click', showMainApp);
+            registerBtn.addEventListener('click', showMainApp);
+            
+            // Navegação entre seções
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Alternar tema claro/escuro
+            const themeToggle = document.getElementById('theme-toggle');
+            
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.documentElement.classList.add('dark');
+                    document.body.setAttribute('data-theme', 'ancestralDark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.body.setAttribute('data-theme', 'ancestral');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
